@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.course.mapeamentojpa.enums.OrderStatus;
 
 @Entity
 @Table(name = "client_order")
@@ -22,15 +26,19 @@ public class Order implements Serializable {
 	
 	private Instant moment;
 	
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
+	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
 	
 	public Order() {}
 
-	public Order(Long id, Instant moment, User client) {		
+	public Order(Long id, Instant moment, OrderStatus status, User client) {		
 		this.id = id;
 		this.moment = moment;
+		this.setStatus(status);
 		this.client = client;
 	}
 
@@ -48,6 +56,14 @@ public class Order implements Serializable {
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 
 	public User getClient() {
