@@ -1,4 +1,4 @@
-package com.course.mapeamentojpa;
+package com.course.mapeamentojpa.configs;
 
 import java.util.Arrays;
 
