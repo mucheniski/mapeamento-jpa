@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.course.mapeamentojpa.entities.Category;
 import com.course.mapeamentojpa.entities.Order;
 import com.course.mapeamentojpa.entities.OrderItem;
+import com.course.mapeamentojpa.entities.Payment;
 import com.course.mapeamentojpa.entities.Product;
 import com.course.mapeamentojpa.entities.User;
 import com.course.mapeamentojpa.enums.OrderStatus;
@@ -80,6 +81,10 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem item4 = new OrderItem(order3, product5, 2, product5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(item1, item2, item3, item4));
+		
+		Payment payment1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), order1);
+		order1.setPayment(payment1);
+		orderRepository.save(order1);
 				
 	}
 	
